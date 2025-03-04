@@ -1,0 +1,49 @@
+# Copyright (C) 2019, Wazuh Inc.
+#
+# This program is a free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public
+# License (version 2) as published by the FSF - Free Software
+# Foundation.
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Adds wazuh namespace to all resources.
+namespace: wazuh
+
+secretGenerator:
+  - name: indexer-certs
+    files:
+      - ../../certs/indexer_cluster/root-ca.pem
+      - ../../certs/indexer_cluster/sa-indexer.pem
+      - ../../certs/indexer_cluster/sa-indexer-key.pem
+      - ../../certs/indexer_cluster/sb-indexer.pem
+      - ../../certs/indexer_cluster/sb-indexer-key.pem
+      - ../../certs/indexer_cluster/dashboard.pem
+      - ../../certs/indexer_cluster/dashboard-key.pem
+      - ../../certs/indexer_cluster/admin.pem
+      - ../../certs/indexer_cluster/admin-key.pem
+      - ../../certs/indexer_cluster/filebeat.pem
+      - ../../certs/indexer_cluster/filebeat-key.pem
+  - name: dashboard-certs
+    files:
+      - certs/dashboard_http/cert.pem
+      - certs/dashboard_http/key.pem
+      - certs/indexer_cluster/root-ca.pem
+
+configMapGenerator:
+  - name: indexer-conf
+    files:
+      - indexer/indexer_conf/opensearch.yml
+      - indexer/indexer_conf/internal_users.yml
+  - name: wazuh-conf
+    files:
+      - wazuh_managers/wazuh_conf/master.conf
+      - wazuh_managers/wazuh_conf/worker.conf
+
+resources:
+  - base/wazuh-ns.yaml
+  - base/storage-class.yaml
+
+  - indexer_stack/wazuh-dashboard/dashboard-svc.yaml
+  - indexer_stack/wazuh-dashboard/dashboard-deploy.yaml
