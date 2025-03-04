@@ -14,17 +14,17 @@ namespace: wazuh
 secretGenerator:
   - name: indexer-certs
     files:
-      - ../../certs/indexer_cluster/root-ca.pem
-      - ../../certs/indexer_cluster/sa-indexer.pem
-      - ../../certs/indexer_cluster/sa-indexer-key.pem
-      - ../../certs/indexer_cluster/sb-indexer.pem
-      - ../../certs/indexer_cluster/sb-indexer-key.pem
-      - ../../certs/indexer_cluster/dashboard.pem
-      - ../../certs/indexer_cluster/dashboard-key.pem
-      - ../../certs/indexer_cluster/admin.pem
-      - ../../certs/indexer_cluster/admin-key.pem
-      - ../../certs/indexer_cluster/filebeat.pem
-      - ../../certs/indexer_cluster/filebeat-key.pem
+      - certs/indexer_cluster/root-ca.pem
+      - certs/indexer_cluster/sa-indexer.pem
+      - certs/indexer_cluster/sa-indexer-key.pem
+      - certs/indexer_cluster/sb-indexer.pem
+      - certs/indexer_cluster/sb-indexer-key.pem
+      - certs/indexer_cluster/dashboard.pem
+      - certs/indexer_cluster/dashboard-key.pem
+      - certs/indexer_cluster/admin.pem
+      - certs/indexer_cluster/admin-key.pem
+      - certs/indexer_cluster/filebeat.pem
+      - certs/indexer_cluster/filebeat-key.pem
   - name: dashboard-certs
     files:
       - certs/dashboard_http/cert.pem
