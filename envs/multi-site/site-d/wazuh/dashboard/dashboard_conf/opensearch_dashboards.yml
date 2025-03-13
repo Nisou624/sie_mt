@@ -1,7 +1,7 @@
 
 server.host: 0.0.0.0
 server.port: 5601
-opensearch.hosts: [https://sa-indexer:9200, https://sb-indexer:9200]
+opensearch.hosts: [https://192.168.59.116:31717] #should be automatically updated
 opensearch.ssl.verificationMode: none
 opensearch.requestHeadersWhitelist: [ authorization,securitytenant ]
 opensearch_security.multitenancy.enabled: false
@@ -11,18 +11,3 @@ server.ssl.key: "/usr/share/wazuh-dashboard/certs/key.pem"
 server.ssl.certificate: "/usr/share/wazuh-dashboard/certs/cert.pem"
 opensearch.ssl.certificateAuthorities: ["/usr/share/wazuh-dashboard/certs/root-ca.pem"]
 uiSettings.overrides.defaultRoute: /app/wz-home
-ip.ignore: wazuh-alerts-*
-ip.selector: true
-wazuh_core.hosts:
-  - SITE A:
-      url: https://sa-indexer
-      port: 55000
-      username: wazuh-wui
-      password: wazuh-wui
-      run_as: true
-  - SITE B:
-      url: https://sb-indexer
-      port: 55000
-      username: wazuh-wui
-      password: wazuh-wui
-      run_as: true

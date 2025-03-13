@@ -4,5 +4,3 @@ resources:
   - wazuh
 patches:
   - path: storage-class.yaml
-  - path: indexer-resources.yaml
-  - path: wazuh-resources.yaml

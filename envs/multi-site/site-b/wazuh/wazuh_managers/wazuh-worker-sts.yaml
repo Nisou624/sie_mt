@@ -13,7 +13,7 @@ metadata:
   name: wazuh-manager-worker
   namespace: wazuh
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: wazuh-manager
@@ -49,6 +49,7 @@ spec:
       containers:
         - name: wazuh-manager
           image: 'wazuh/wazuh-manager:4.10.0'
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               cpu: 400m
@@ -113,7 +114,7 @@ spec:
               name: cluster
           env:
             - name: INDEXER_URL
-              value: 'https://sa-indexer:9200'
+              value: 'https://sb-indexer:9200'
             - name: INDEXER_USERNAME
               valueFrom:
                 secretKeyRef:

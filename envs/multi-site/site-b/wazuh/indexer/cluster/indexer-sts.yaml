@@ -13,7 +13,7 @@ metadata:
   name: wazuh-indexer
   namespace: wazuh
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: wazuh-indexer
@@ -60,6 +60,7 @@ spec:
       containers:
         - name: wazuh-indexer
           image: 'wazuh/wazuh-indexer:4.10.0'
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               cpu: 500m
@@ -90,12 +91,12 @@ spec:
             - name: wazuh-indexer
               mountPath: /var/lib/wazuh-indexer
             - name: indexer-certs
-              mountPath: /usr/share/wazuh-indexer/certs/node-key.pem
-              subPath: node-key.pem
+              mountPath: /usr/share/wazuh-indexer/certs/sb-indexer-key.pem
+              subPath: sb-indexer-key.pem
               readOnly: true
             - name: indexer-certs
-              mountPath: /usr/share/wazuh-indexer/certs/node.pem
-              subPath: node.pem
+              mountPath: /usr/share/wazuh-indexer/certs/sb-indexer.pem
+              subPath: sb-indexer.pem
               readOnly: true
             - name: indexer-certs
               mountPath: /usr/share/wazuh-indexer/certs/root-ca.pem
