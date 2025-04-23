@@ -27,4 +27,5 @@ spec:
   ports:
     - name: dashboard
       port: 443
+      nodePort: 31545
       targetPort: 5601
