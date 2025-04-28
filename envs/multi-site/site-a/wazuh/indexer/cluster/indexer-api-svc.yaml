@@ -16,10 +16,11 @@ metadata:
     app: wazuh-indexer
 spec:
   type: NodePort
+  # type: LoadBalancer
   selector:
     app: wazuh-indexer
   ports:
     - name: indexer-rest
       port: 9200
-      nodePort: 30624
+      nodePort: 30920
       targetPort: 9200

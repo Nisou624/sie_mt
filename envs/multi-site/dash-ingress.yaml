@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wazuh-dashboard-ingress
+  namespace: site-d
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+        - dashboard.wazuh.itm.home
+      secretName: dashboard-certs-ch8t976d8t   # Pre-created TLS secret
+  rules:
+    - host: dashboard.wazuh.itm.home
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dashboard   # The Service exposing your dashboard
+                port:
+                  number: 443

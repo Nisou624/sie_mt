@@ -20,14 +20,16 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
 spec:
   type: NodePort
+  # type: LoadBalancer
   selector:
     app: wazuh-manager
     node-type: master
   ports:
     - name: registration
       port: 1515
+      nodePort: 31515
       targetPort: 1515
     - name: api
       port: 55000
-      nodePort: 31500
+      nodePort: 30550
       targetPort: 55000
