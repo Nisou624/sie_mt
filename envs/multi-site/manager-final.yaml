@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sa-manager-ingress
+  namespace: site-a
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: wazuh.itm.home
+      http:
+        paths:
+          - path: /api
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: wazuh
+                port:
+                  number: 55000
+          - path: /registration
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: wazuh
+                port:
+                  number: 1515
+          - path: /reporting
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: wazuh
+                port:
+                  number: 1514

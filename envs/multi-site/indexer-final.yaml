@@ -8,10 +8,10 @@ metadata:
 spec:
   ingressClassName: "nginx"
   rules:
-    - host: indexer.sa.wazuh.itm.home
+    - host: wazuh.itm.home
       http:
         paths:
-          - path: /
+          - path: /indexer
             pathType: Prefix
             backend:
               service:
