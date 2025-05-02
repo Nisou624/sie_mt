@@ -23,10 +23,30 @@ spec:
         app: wazuh-dashboard
       name: wazuh-dashboard
     spec:
+      # Init container to copy config from ConfigMap to writable emptyDir
+      initContainers:
+        - name: copy-config
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              # Copy and set permissions
+              cp /config/opensearch_dashboards.yml /dest/opensearch_dashboards.yml
+              cp /config/config.yml /dest/wazuh.yml
+              chown -R 1000:0 /dest
+          volumeMounts:
+            - name: config-src
+              mountPath: /config
+            - name: config-dest
+              mountPath: /dest
       volumes:
-        - name: config
+        - name: config-src
           configMap:
             name: dashboard-conf
+        - name: config-dest
+          emptyDir: {}
         - name: dashboard-certs
           secret:
             secretName: dashboard-certs
@@ -39,22 +59,22 @@ spec:
               cpu: 500m
               memory: 1Gi
           volumeMounts:
-            - name: config
+            # Mount copied config files
+            - name: config-dest
               mountPath: /usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
               subPath: opensearch_dashboards.yml
-              readOnly: false
-            - name: config
+            - name: config-dest
               mountPath: /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
-              subPath: config.yml
-              readOnly: false
+              subPath: wazuh.yml
+            # Certificates
             - name: dashboard-certs
               mountPath: /usr/share/wazuh-dashboard/certs/cert.pem
-              readOnly: true
               subPath: cert.pem
+              readOnly: true
             - name: dashboard-certs
               mountPath: /usr/share/wazuh-dashboard/certs/key.pem
-              readOnly: true
               subPath: key.pem
+              readOnly: true
             - name: dashboard-certs
               mountPath: /usr/share/wazuh-dashboard/certs/root-ca.pem
               subPath: root-ca.pem
@@ -64,7 +84,7 @@ spec:
               name: dashboard
           env:
             - name: INDEXER_URL
-              value: 'https://wazuh.itm.home/indexer' #should be automatically updated
+              value: 'https://wazuh.itm.home/indexer'
             - name: INDEXER_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -92,7 +112,7 @@ spec:
             - name: SERVER_SSL_KEY
               value: /usr/share/wazuh-dashboard/certs/key.pem
             - name: WAZUH_API_URL
-              value: "https://wazuh.itm.home/indexer" #should be automatically updated
+              value: "https://wazuh.itm.home/indexer"
             - name: API_USERNAME
               valueFrom:
                 secretKeyRef:

@@ -35,6 +35,7 @@ spec:
       initContainers:
         - name: volume-mount-hack
           image: busybox
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: 50m
@@ -51,6 +52,7 @@ spec:
               mountPath: /var/lib/wazuh-indexer
         - name: increase-the-vm-max-map-count
           image: busybox
+          imagePullPolicy: IfNotPresent
           command:
             - sysctl
             - -w
