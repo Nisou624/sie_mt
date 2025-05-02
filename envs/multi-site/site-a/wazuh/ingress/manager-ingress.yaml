@@ -5,33 +5,28 @@ metadata:
   namespace: site-a
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: "nginx"
   rules:
-    - host: api.manager.sa.wazuh.itm.home
+    - host: wazuh.itm.home
       http:
         paths:
-          - path: /
+          - path: /api(/|$)(.*)
             pathType: Prefix
             backend:
               service:
                 name: wazuh
                 port:
                   number: 55000
-    - host: registration.manager.sa.wazuh.itm.home
-      http:
-        paths:
-          - path: /
+          - path: /registration(/|$)(.*)
             pathType: Prefix
             backend:
               service:
                 name: wazuh
                 port:
                   number: 1515
-    - host: reporting.manager.sa.wazuh.itm.home
-      http:
-        paths:
-          - path: /
+          - path: /reporting(/|$)(.*)
             pathType: Prefix
             backend:
               service:

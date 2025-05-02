@@ -58,3 +58,6 @@ resources:
   - indexer/indexer-svc.yaml
   - indexer/cluster/indexer-api-svc.yaml
   - indexer/cluster/indexer-sts.yaml
+
+  - ingress/manager-ingress.yaml
+  - ingress/inexer-ingress.yaml

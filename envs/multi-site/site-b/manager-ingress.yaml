@@ -2,11 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sa-manager-ingress
-  namespace: site-a
+  namespace: site-b
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: "nginx"
   rules:
@@ -14,30 +13,23 @@ spec:
       http:
         paths:
           - path: /api(/|$)(.*)
-            pathType: ImplementationSpecific
+            pathType: Prefix
             backend:
               service:
                 name: wazuh
                 port:
                   number: 55000
           - path: /registration(/|$)(.*)
-            pathType: ImplementationSpecific
+            pathType: Prefix
             backend:
               service:
                 name: wazuh
                 port:
                   number: 1515
           - path: /reporting(/|$)(.*)
-            pathType: ImplementationSpecific
+            pathType: Prefix
             backend:
               service:
                 name: wazuh
                 port:
                   number: 1514
-          - path: /indexer(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: sa-indexer
-                port:
-                  number: 9200
