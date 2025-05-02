@@ -84,7 +84,7 @@ spec:
               name: dashboard
           env:
             - name: INDEXER_URL
-              value: 'https://wazuh.itm.home/indexer'
+              value: "https://wazuh.itm.home/indexer"
             - name: INDEXER_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -112,7 +112,7 @@ spec:
             - name: SERVER_SSL_KEY
               value: /usr/share/wazuh-dashboard/certs/key.pem
             - name: WAZUH_API_URL
-              value: "https://wazuh.itm.home/indexer"
+              value: "https://wazuh.itm.home/api"
             - name: API_USERNAME
               valueFrom:
                 secretKeyRef:
