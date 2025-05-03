@@ -60,4 +60,4 @@ resources:
   - indexer/cluster/indexer-sts.yaml
 
   - ingress/manager-ingress.yaml
-  - ingress/inexer-ingress.yaml
+  - ingress/indexer-ingress.yaml

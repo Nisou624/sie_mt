@@ -15,10 +15,12 @@ metadata:
   labels:
     app: wazuh-manager
 spec:
+  type: NodePort
   selector:
     app: wazuh-manager
   ports:
     - name: cluster
       port: 1516
+      nodePort: 31516
       targetPort: 1516
-  clusterIP: None
+# clusterIP: None

@@ -23,7 +23,6 @@ spec:
         app: wazuh-dashboard
       name: wazuh-dashboard
     spec:
-      # Init container to copy config from ConfigMap to writable emptyDir
       initContainers:
         - name: copy-config
           image: busybox
@@ -84,7 +83,7 @@ spec:
               name: dashboard
           env:
             - name: INDEXER_URL
-              value: "https://wazuh.itm.home/indexer"
+              value: 'https://192.168.43.34:30920'
             - name: INDEXER_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -112,7 +111,7 @@ spec:
             - name: SERVER_SSL_KEY
               value: /usr/share/wazuh-dashboard/certs/key.pem
             - name: WAZUH_API_URL
-              value: "https://wazuh.itm.home/api"
+              value: https://192.168.43.34
             - name: API_USERNAME
               valueFrom:
                 secretKeyRef:

@@ -13,21 +13,28 @@ spec:
       http:
         paths:
           - path: /api(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: wazuh
                 port:
                   number: 55000
+          - path: /manager(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: wazuh-cluster
+                port:
+                  number: 1516
           - path: /registration(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: wazuh
                 port:
                   number: 1515
           - path: /reporting(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: wazuh
