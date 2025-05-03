@@ -23,29 +23,10 @@ spec:
         app: wazuh-dashboard
       name: wazuh-dashboard
     spec:
-      initContainers:
-        - name: copy-config
-          image: busybox
-          imagePullPolicy: IfNotPresent
-          command:
-            - sh
-            - -c
-            - |
-              # Copy and set permissions
-              cp /config/opensearch_dashboards.yml /dest/opensearch_dashboards.yml
-              cp /config/config.yml /dest/wazuh.yml
-              chown -R 1000:0 /dest
-          volumeMounts:
-            - name: config-src
-              mountPath: /config
-            - name: config-dest
-              mountPath: /dest
       volumes:
-        - name: config-src
+        - name: config
           configMap:
             name: dashboard-conf
-        - name: config-dest
-          emptyDir: {}
         - name: dashboard-certs
           secret:
             secretName: dashboard-certs
@@ -58,14 +39,14 @@ spec:
               cpu: 500m
               memory: 1Gi
           volumeMounts:
-            # Mount copied config files
-            - name: config-dest
+            - name: config
               mountPath: /usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
               subPath: opensearch_dashboards.yml
-            - name: config-dest
+              readOnly: false
+            - name: config
               mountPath: /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
-              subPath: wazuh.yml
-            # Certificates
+              subPath: config.yml
+              readOnly: false
             - name: dashboard-certs
               mountPath: /usr/share/wazuh-dashboard/certs/cert.pem
               subPath: cert.pem
