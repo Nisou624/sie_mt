@@ -1,7 +1,7 @@
 
 server.host: 0.0.0.0
 server.port: 5601
-opensearch.hosts: [https://192.168.43.34:30920] #should be automatically updated
+opensearch.hosts: [https://192.168.1.10:30920] #should be automatically updated
 opensearch.ssl.verificationMode: none
 opensearch.requestHeadersWhitelist: [ authorization,securitytenant ]
 opensearch_security.multitenancy.enabled: false

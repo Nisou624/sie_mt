@@ -155,7 +155,7 @@
 #     password: <password>
 hosts:
   - site-a: #should be automatically updated
-      url: https://192.168.43.34 #should be automatically updated
+      url: https://192.168.1.10 #should be automatically updated
       port: 30550 #should use the default port (55000)
       username: wazuh-wui
       password: MyS3cr37P450r.*-
