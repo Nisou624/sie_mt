@@ -27,3 +27,8 @@ spec:
     - name: agents-events
       port: 1514
       targetPort: 1514
+    - name: syslog-udp
+      port: 514
+      nodePort: 30514
+      protocol: UDP
+      targetPort: 514

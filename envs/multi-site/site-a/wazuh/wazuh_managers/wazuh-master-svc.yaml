@@ -31,5 +31,5 @@ spec:
       targetPort: 1515
     - name: api
       port: 55000
-      nodePort: 30550
+      nodePort: 30055
       targetPort: 55000

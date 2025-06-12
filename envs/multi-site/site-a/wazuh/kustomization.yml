@@ -38,6 +38,7 @@ configMapGenerator:
     files:
       - wazuh_managers/wazuh_conf/master.conf
       - wazuh_managers/wazuh_conf/worker.conf
+      - wazuh_managers/wazuh_conf/internal_options.conf
 
 resources:
   - base/wazuh-ns.yaml

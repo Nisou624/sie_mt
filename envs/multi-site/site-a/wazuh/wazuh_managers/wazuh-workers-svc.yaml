@@ -29,3 +29,8 @@ spec:
       port: 1514
       nodePort: 31514
       targetPort: 1514
+    - name: syslog-udp
+      port: 514
+      nodePort: 30154
+      protocol: UDP
+      targetPort: 514

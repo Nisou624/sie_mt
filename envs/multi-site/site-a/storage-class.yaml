@@ -20,3 +20,6 @@ provisioner: k8s.io/minikube-hostpath
 
 # If you're using a different provider you can list storage classes
 # with: "kubectl get sc" and look for the column "Provisioner"
+
+#provsioner: rancher.io/local-path
+#volumeBindingMode: WaitForFirstConsumer

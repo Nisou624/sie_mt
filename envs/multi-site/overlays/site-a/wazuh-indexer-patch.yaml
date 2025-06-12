@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wazuh-indexer
+  namespace: site-a
+spec:
+  template:
+    spec:
+      nodeSelector:
+        dedicated: wazuh
